@@ -1,0 +1,17 @@
+-time steps, mean/std of number of steps
+-p values of true model
+-in total true model was correctly recognized in x % of trials.
+-most cases among the top models (mean=better than x%, std=)
+
+-same w/ beta -> distance from real beta as x, rank as y
+
+-recognition of state type (overall and dependant on algo type)
+-recognition of algo type (overall and dependant on state type)
+
+# innerhalb EINES trials: vier typen gegeneinander, mit gleichem beta
+# innerhalb eines typus: beta
+
+-greedy vs optimal in concave, convex and no obstacles
+
+# For instance, it should be possible to discern a complete uniform random policy from a greedy or an optimal policy, and it might not be able to discern greedy and optimal policies if you set the beta value to very low values, but it might if you set it to very high values.
+-beta=0, beta=3, greedy vs optimal, vector vs grid -> p values

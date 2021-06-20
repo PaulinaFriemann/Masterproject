@@ -1,0 +1,67 @@
+\subsection{Model Computations by \citeA{baker2009}}\label{subsec:models}
+
+The models proposed by \citeA{baker2009} builds upon these classical calculations, however, some specifications are adapted. In the following part, the calculations by model M1 from \citeA{baker2009} will be outlined. All calculations are dependent on the given environment. However, since we assume the environment to be static, we will leave it out in the following definitions for the sake of simplicity.
+
+\paragraph{Setup.}
+The model is supplied with a set of states $S$ (i.e., the environment), a set of goals $G$, with $G \subseteq S$, a set of possible actions $A$, and a set of obstacles $O \subseteq S$ in the environment, with $O \cap  G = \emptyset$. Furthermore, a parameter $\beta$ is introduced, which specifies the determinism of the agent. With $\beta=0$, steps are taken randomly with no prioritization according to state utilities, with higher values of $\beta$, the agent moves increasingly deterministic.
+
+From these context specifications, the transition matrix $T_{i,a,j}, i,j \in S, a \in A$ is inferred, which specifies all possible state transitions $i \overset{a}{\rightarrow} j$ in the environment. These can in theory be stochastic transitions, however, in this model, only deterministic transitions are considered. This means it is assumed that every action the agent takes has a deterministic outcome.
+In this report, the transition model $T_{i,a,j}$ will be shortened to $T$. $T(i)$ then refers to all action-state pairs possible from state $i$. $T(i,a)$ denotes all states $j$ that can be reached from state $i$ with action $a$ (for generalizability; in the concrete calculations, this will always be a single state, as the transitions are deterministic).
+
+\paragraph{Policy calculation.}
+The next step is the calculation of the reward function $R: {S,A,S} \rightarrow  {\rm I\!R}$. This reward function is similar to the reward function specified in Section \ref{para:value_it}, but since the model accounts for diagonal movements, the move cost from an origin state $i$ is dependent on the destination state $j$. The reward function has to be specified for each goal $g \in G$.
+
+\begin{equation}\label{eq:rewards}
+	R(i,a,j | g)= 
+	\begin{cases}
+		\text{goal reward} + \text{move cost}(a),& \text{if } i = g\\
+		\text{trap cost},              & \text{if } i \in O \\
+		\text{move cost}(a) & \text{else}
+	\end{cases}
+\end{equation}%\[
+
+%\]
+
+Using these precalculations, a value iteration algorithm can be applied until a specified convergence tolerance is reached. The utility function is also calculated for every goal.
+
+%\[
+\begin{equation}
+U_{t+1}(i|g) \leftarrow \underset{a}{\max} ( R(i,a,j|g) + \gamma U_t(j|g)  ), ~~~a,j \in T(i)
+\end{equation}
+%\]
+
+$\gamma$ is a convergence factor specified by the modeler.
+
+With the converged utility function, the policies can be determined. Contrary to classical policy calculations, the transitions themselves are not stochastic, but the decisions taken by the agent are.
+This means that an agent does not always take the action which optimizes its utility, but takes actions stochastically, with the probabilities depending on the utilities. The optimal action is chosen with the highest probability, the second best with the second highest probability and so on.
+
+This is done by taking the soft-max of the utilities multiplied with the determinism factor $\beta$:
+
+Let $\pi$ be a policy, then the probability of taking action $a$ in state $i$, given that the agent pursues  goal $g$ is
+
+%\[
+\begin{equation}\label{eq:boltzmann}
+P_\pi(a|i,g) = \frac{exp(  \beta(  R(i,a,j|g) + \gamma U(j|g)  )  )}{ \sum_{T_i}  exp(  \beta(  R(i,a,j|g) + \gamma U(j|g)  )  )}
+\end{equation}
+%\]
+for all $a,j \in T(i)$.
+
+\paragraph{Goal inference.}
+The last step in the model is the inversion of the planning algorithm applied before. 
+Given a trajectory up to a time point $T$, $\{ s_0, s_1, ..., s_T  \}$ with $s_0,...,s_n \in S$, the posterior probabilities $P(G=g|s_0,...,s_T)$ are calculated for every goal.
+
+This is done by recursively calculating the likelihoods of the partial trajectories in $t$, given the priors over the goals $P(G)$. In each step, $a$ denotes all possible actions that can lead from a state $s_t$ to the next state $s_{t+1}$ in the trajectory.
+
+
+\begin{flalign*}
+		& P(s_0|G=g) = P(g) \\
+		& P(s_0, s_1 | G=g) = P(s_0 | G=g) \cdot P_\pi(a | s_0, g) \\
+		& ... \\
+		& P(s_0, ...,s_T | G=g) = P(s_0,...,s_{T-1} | G=g) \cdot P_\pi(a | s_{T-1}, g)
+\end{flalign*}
+
+Using Bayes' Rule, these likelihoods can be inverted, which predicts, which of the goals in the environment is most likely the pursued goal, given the observed trajectory:
+
+\begin{equation}\label{eq:posteriors}
+	P(g|s_1,...,s_T) \propto P(s_2,...,s_T|s_1, g) \cdot P(g)
+\end{equation} 

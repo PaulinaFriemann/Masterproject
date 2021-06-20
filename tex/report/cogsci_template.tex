@@ -1,0 +1,163 @@
+% 
+% Annual Cognitive Science Conference
+% Sample LaTeX Paper -- Proceedings Format
+% 
+
+% Original : Ashwin Ram (ashwin@cc.gatech.edu)       04/01/1994
+% Modified : Johanna Moore (jmoore@cs.pitt.edu)      03/17/1995
+% Modified : David Noelle (noelle@ucsd.edu)          03/15/1996
+% Modified : Pat Langley (langley@cs.stanford.edu)   01/26/1997
+% Latex2e corrections by Ramin Charles Nakisa        01/28/1997 
+% Modified : Tina Eliassi-Rad (eliassi@cs.wisc.edu)  01/31/1998
+% Modified : Trisha Yannuzzi (trisha@ircs.upenn.edu) 12/28/1999 (in process)
+% Modified : Mary Ellen Foster (M.E.Foster@ed.ac.uk) 12/11/2000
+% Modified : Ken Forbus                              01/23/2004
+% Modified : Eli M. Silk (esilk@pitt.edu)            05/24/2005
+% Modified : Niels Taatgen (taatgen@cmu.edu)         10/24/2006
+% Modified : David Noelle (dnoelle@ucmerced.edu)     11/19/2014
+
+%% Change "letterpaper" in the following line to "a4paper" if you must.
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage{standalone}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{sty/mypackages}
+\usepackage{tkz-euclide}
+
+\AtBeginDocument{\renewcommand{\APACrefYearMonthDay}[3]{\BBOP{#1}\BBCP}}
+
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{url}
+
+\usepackage[%
+%font={small,sf},
+labelfont=bf,
+format=hang,
+format=plain,
+margin=0pt,
+%width=0.8\linewidth,
+]{caption}
+\usepackage[list=true, font={normalsize}]{subcaption}
+
+\usepackage{silence}
+%Disable all warnings issued by latex starting with "You have..."
+\WarningFilter{latex}{You have requested package}
+
+\DeclareMathOperator*{\argmax}{argmax}
+
+
+
+\newcommand{\TODO}[1]{\textcolor{red}{\Large{#1}}}
+\newcommand{\module}[1]{\textcolor{black}{\texttt{#1}}}
+
+\title{Inverse Planning as a Framework for Insect Navigation Research}
+ 
+\author{{\large \bf Paulina Friemann (friemanp@cs.uni-freiburg.de)} \\
+  Department of Computer Science, \\
+  University of Freiburg}
+
+\begin{document}
+
+\maketitle
+
+\iffalse
+\todo{i get now where this should be going: overall question of which pathfinding algos are there, how biologically plausible are they? two paths: 1) theoretical work of things like time and memory complexity, representational structures, performance (?), (dis-)advantages, assumptions and constraints, etc. 2) experimental sampling in a framework: explanation of the framework, what is there etc., then frame it as okay we want to take a look at not only this value iteration policy generation, but at all kinds of pathfinding algos, adapted to solve the same problem, i.e., to generate policies over the environment. here we can build the bridge towards trajectory sampling stuff.}
+\fi
+
+\begin{abstract}
+The study of insect navigation is a very active field of research.
+Computational modeling approaches mainly focus on the simulation of behavior observed in experiments.
+In this project, a framework is proposed based on inverse planning, taking inspiration from a cognitive model of goal inferences in human subjects.
+In this framework, computational models can be embedded, and either be used as grounds for sampling data, or as a comparison to experimental data.
+The Bayesian frame allows to draw numerical inferences to agent goals or to the models themselves.
+\end{abstract}
+
+\iffalse
+\begin{itemize}
+	\item Introduction
+	\item Tenenbaum Paper
+	\item Problem Definition....from Pathfinding to Policy Finding
+	\item Pathfinding Algos
+	\item Program Workings, pseudocode and formulas
+	\item Trajectory Sampling
+\end{itemize}
+\fi
+
+
+%\input{todos.tex}
+
+\section{Introduction}
+
+% general intro
+% pathfinding (AI, biologically inspired, models)
+% Path1 & Path2 explanations
+% related works
+% structure
+
+\input{intro/intro.tex}
+
+\input{intro/tenenbaum.tex}
+
+\iffalse
+\section*{P1}
+
+% P1
+% all considered pathfinding algos
+% evaluation
+
+\input{intro/pathfinding.tex}
+\fi
+
+\section{Background}
+
+% P2
+% explain Tenenbaum
+% explain MDP
+% explain Tenenbaum Model
+% Pathfinding algos adaptations to generate policies
+% trajectory sampling
+% results
+
+\input{intro/defs.tex}
+
+\input{intro/tenenbaum_computations.tex}
+
+\input{intro/trajectory_sampling.tex}
+
+\section{Method}
+
+\input{method.tex}
+
+\input{experiments.tex}
+
+\section{Results}
+
+\input{results.tex}
+
+\section{Discussion and Future Work}
+
+\input{discussion.tex}
+
+
+%\section{Future Work}
+
+\input{conclusion.tex}
+
+%------------- bib --------------------------
+
+\bibliographystyle{apacite}
+
+\setlength{\bibleftmargin}{.125in}
+\setlength{\bibindent}{-\bibleftmargin}
+
+\bibliography{pathfinding.bib}
+
+\newpage
+\onecolumn
+\section*{Appendix}
+
+\input{app/ex_loading.tex}
+
+\input{app/ex_sampling.tex}
+
+\end{document}

@@ -1,0 +1,16 @@
+*.pytest_cache
+.vscode/
+__pycache__/
+*.aux
+*.toc
+*.idx
+*.synctex.gz
+*.log
+tex/*.pdf
+.idea/
+venv/
+*.blg
+*.pdf
+*.bbl
+*.RHistory
+*.RData

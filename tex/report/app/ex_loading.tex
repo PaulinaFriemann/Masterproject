@@ -1,0 +1,29 @@
+\subsection{Example 1: Loading experimental data}\label{appendix:ex_loading}
+\begin{verbatim}
+	# environment definition
+	# obstacles can be set, but is not yet supported to be specified in the config within the data file
+	obstacles = [(5,5), (6,5)]
+	
+	# goals and obstacles should be set within the boundaries of the environment as specified in the config
+	goals = [Goal('A', (6, 4)), Goal('B', (5, 7))]
+	
+	# set pixelation if needed
+	pix = 2
+	
+	dm = DataModel("data/example.csv", goals, obstacles, pixelation=pix)
+
+	# goals and obstacles will be translated and scaled to the arena in the model, so if they wish
+	# to be used at a later point, they have to be reloaded from the model
+	goals = dm.goals
+	goalA = goals[0]
+	goalB = goals[1]
+	obstacles = dm.obstacles
+	
+	# calculate the optimal policies according to the model
+	policies = dm.get_policies()
+	
+	# calculate the posterior probabilities of the trajectory taken from the file
+	posteriors = dm.get_posteriors(policies, dm.trajectory())
+
+	
+\end{verbatim}

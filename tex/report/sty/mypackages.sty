@@ -1,0 +1,26 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mypackages}[2014/08/21 Example package]
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{pslatex}
+\RequirePackage{pdfpages}
+\RequirePackage{apacite}
+\RequirePackage{graphicx}
+\RequirePackage{url}
+\RequirePackage{listings}
+\RequirePackage{tikz}
+%\RequirePackage{pgfplots}
+\usetikzlibrary{arrows.meta}
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage[english]{babel}
+\RequirePackage[colorinlistoftodos,textsize=small]{todonotes}
+\presetkeys{todonotes}{inline}{}
+\newcommand{\location}{}
+\DeclareOption{..}{\renewcommand{\location}{../}}
+\ProcessOptions\relax
+
+\RequirePackage{\location sty/cogsci}
+\RequirePackage{\location sty/tikz-uml}
+
+\endinput

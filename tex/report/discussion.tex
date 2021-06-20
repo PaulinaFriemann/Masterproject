@@ -1,0 +1,34 @@
+As mentioned in the results section, representation types (so a grid-based representation where the agent \textit{knows} its position in the environment versus a vector representation where the agent knows the vector towards its goal) cannot be distinguished in this frame,
+as they are isomorphisms and essentially indistinguishable when combined with the way the algorithms work.
+This is a very basic issue, and needs to be addressed in any future work on this framework.
+
+Distinguishing the other factors however, algorithm type and $\beta$ values, is working as expected, but could be improved by developing methods to mathematically assimilate the interactions between $\beta$ and algorithm type.
+This would make it easier to measure influences of these parameters independently.
+
+Experiment 1 shows that distinguishing between algorithm type in case of the used algorithms is less reliable if no obstacles are present in the environment.
+This is to be expected, as both algorithms would choose the direct path to the goal.
+
+The experiments have shown that, as expected, obstacles constituted a problem for the greedy type of algorithm, which can be seen by the high number of necessary steps to reach the goal.
+However, the high number of steps in Experiment 2a with the convex obstacle shows that due to the discreteness of the environment, even convex obstacles are a problem to this algorithm.
+
+Recognition of $\beta$ values however works well, especially for Experiments 2a and 2b, as depicted in Figures \ref{fig:rbetaconvex} and \ref{fig:rbeta}.
+
+Future work on this project holds a variety of possibilities.
+The first step would be to improve the comparability of models.
+There are facets to this: on the one hand, because of the desired and implemented modularity of the modeling approaches, interactions between the modules needs to be explored, 
+to achieve meaningful interpretations of a module's details independent of the other modules in a model.
+
+The other side to this is the impact of parameters, such as the determinism factor.
+It needs to be explored how to avoid interactions between model specifications and parameter values, in order to be able to draw conclusions on the parameter itself and its effects.
+A useful addition to the project for these means, and also for the implementation and development of other or novel approaches, would be a set of baseline experiments translated from real experiments.
+
+From this baseline, other representation and navigation approaches can be explored.
+More biologically plausible approaches should be implemented and analyzed, and their interactions studied. For this, existing models and insights from behavioral and neuro-science need to be consulted.
+
+A further possibility would be to integrate a form of ``mental states'' into the models. This could be approached a variety of ways, such as integrating agent states into the environment, or allowing models to be dynamic over time.
+The next step would then be to implement inferences to mental states.
+E.g., if one wanted to infer whether an agent is in a state of hunger, or infer the amount of exploratory pressure.
+
+Moving on to insect data however needs to include an exploration into as to how far the Markov Property holds for insect movement.
+If this is not the case, other forms of problem description need to be taken into account.
+A type of memory would in this case be needed, which expands past the heuristic itself.

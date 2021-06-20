@@ -1,0 +1,53 @@
+\subsection{Path-finding Algorithms}
+
+\todo{Question: is random walk as efficient as exhaustive search if we do not know where the goal is?}
+
+\begin{itemize}
+	\item Random Walk
+	\begin{itemize}
+		\item Maximal Entropy Random Walk
+		\item Correlated Random Walk
+		\item Lévy Walk
+	\end{itemize}
+	\item Chemotaxis
+	\item Greedy
+	\item General and Exhaustive Search \cite{russell1995, deo1984, korf1988}
+	\begin{itemize}
+		\item MDP / Dijkstra
+		\item Breadth-first search
+		\item Uniform-cost search (Dijkstra \cite{dijkstra1959})
+		\item Depth-first search
+		\item Depth-limited
+		\item Iterative deepening
+		\item Bidirectional
+		\item Bellman-Ford?
+	\end{itemize}
+	\item Informed Search
+	\begin{itemize}
+		\item Greedy Search -> always expand first the node that is deemed closest to the goal, based on a heuristic, e.g. straight-line distance; not guaranteed to find best path
+		\item Best-First Search $\rightarrow$ GSM with informed queing/node expanding based on an evaluation function for the nodes \cite{russell1995}
+		\item A* (Hart et al. 1968, 1972) (Dynamic weighting Pohl 1973?)
+	\end{itemize}
+	\item A* - deviants
+	\begin{itemize}
+		\item Heuristic Functions (Newell and Ernst, 1965) --> Iterative Deepening A*
+		\item Hierarchical Path-Finding A* \cite{botea}
+		\item SMA* (Simplified Memory-Bound A*)
+		\item RBFS (Korf 1993), IE (Russell 1992); tabu search (Glover 1989); see Russell and Norvig p.116f
+		\item Bidirectional A*
+		\item Multi-Heuristic A* \cite{aine2016}
+	\end{itemize}
+	\item Biologically inspired
+	\begin{itemize}
+		\item *Beetle Antenna Search Algorithm* \cite{jiang2017}
+	\end{itemize} 
+
+\end{itemize}
+
+
+\begin{itemize}
+	\item Waypoint navigation
+	\item Jump Point Search
+	\item Wavefront Algorithm
+	\item Simulated Annealing (typically combined with potential field method) \TODO{maybe integrate into greedy}
+\end{itemize}
